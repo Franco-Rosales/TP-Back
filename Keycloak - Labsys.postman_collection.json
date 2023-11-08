@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "db1bde94-c379-4426-9212-c79e7e9e3867",
+		"name": "Keycloak - Labsys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "335329"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "ejemplo_client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "pass123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "ejemplo_usuario",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://labsys.frc.utn.edu.ar/aim/realms/backend-ejemplos/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"labsys",
+						"frc",
+						"utn",
+						"edu",
+						"ar"
+					],
+					"path": [
+						"aim",
+						"realms",
+						"backend-ejemplos",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "ejemplo_client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "pass123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "ejemplo_admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://labsys.frc.utn.edu.ar/aim/realms/backend-ejemplos/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"labsys",
+						"frc",
+						"utn",
+						"edu",
+						"ar"
+					],
+					"path": [
+						"aim",
+						"realms",
+						"backend-ejemplos",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
