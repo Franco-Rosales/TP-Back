@@ -9,6 +9,6 @@ public class EstacionesDTO {
     private Long id;
     private String nombre;
     private LocalDate fechaHoraCracion;
-    private Long latitud;
-    private Long longitud;
+    private Double latitud;
+    private Double longitud;
 }

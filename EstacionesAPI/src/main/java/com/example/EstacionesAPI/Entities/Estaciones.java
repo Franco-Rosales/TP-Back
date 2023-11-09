@@ -17,6 +17,15 @@ public class Estaciones {
     private String nombre;
     @Column(name = "FECHA_HORA_CREACION")
     private LocalDate fechaHoraCreacion;
-    private Long latitud;
-    private Long longitud;
+    private Double latitud;
+    private Double longitud;
+
+    public double calcularDistancia(double latitudActual, double longitudActual) {
+        // Calcula la diferencia en latitud y longitud.
+        double deltaLatitud = latitud - latitudActual;
+        double deltaLongitud = longitud - longitudActual;
+
+        // Calcula la distancia euclidiana en metros.
+        return Math.sqrt(Math.pow(deltaLatitud * 110000, 2) + Math.pow(deltaLongitud * 110000, 2));
+    }
 }
