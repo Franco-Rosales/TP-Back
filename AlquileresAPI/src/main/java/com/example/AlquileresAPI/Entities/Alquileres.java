@@ -16,11 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Alquileres {
     @Id
-    @GeneratedValue(generator = "alquileres")
-    @TableGenerator(name = "alquileres", table = "sqlite_sequence",
-            pkColumnName = "name", valueColumnName = "seq",
-            pkColumnValue="id",
-            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "alquileres", strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "id_cliente")

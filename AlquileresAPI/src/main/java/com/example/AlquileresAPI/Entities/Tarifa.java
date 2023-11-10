@@ -13,11 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Tarifa {
     @Id
-    @GeneratedValue(generator = "tarifas")
-    @TableGenerator(name = "tarifas", table = "sqlite_sequence",
-            pkColumnName = "name", valueColumnName = "seq",
-            pkColumnValue = "id",
-            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "tarifas", strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "tipo_tarifa")
