@@ -29,6 +29,13 @@ public class EstacionesService {
         Estaciones estacion = estacionesRepository.save(transformarAEntidad(estacionesDTO));
         return transformarADTO(estacion);
     }
+
+    public Estaciones getById(Long id ) {
+        Estaciones estaciones = estacionesRepository.findById(id).orElseThrow(() -> new RuntimeException("No se encontro la estacion"));
+        return estaciones;
+
+    }
+
     private EstacionesDTO transformarADTO(Estaciones estacion) {
         EstacionesDTO estacionesDTO = new EstacionesDTO();
         estacionesDTO.setId(estacion.getId());

@@ -1,6 +1,7 @@
 package com.example.EstacionesAPI.Controller;
 
 import com.example.EstacionesAPI.Dtos.EstacionesDTO;
+import com.example.EstacionesAPI.Entities.Estaciones;
 import com.example.EstacionesAPI.EstacionesApiApplication;
 import com.example.EstacionesAPI.Service.EstacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class EstacionesController {
     public ResponseEntity<EstacionesDTO> agregarEstacion(@RequestBody EstacionesDTO estacionesDTO){
         EstacionesDTO agregada = estacionesService.addEstacion(estacionesDTO);
         return ResponseEntity.ok(agregada);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Estaciones> getEstacionById(@PathVariable("id") Long id){
+        Estaciones estacion = estacionesService.getById(id);
+        return ResponseEntity.ok(estacion);
     }
 }

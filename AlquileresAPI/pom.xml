@@ -50,6 +50,12 @@
 			<artifactId>hibernate-community-dialects</artifactId>
 			<version>6.2.7.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>EstacionesAPI</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
