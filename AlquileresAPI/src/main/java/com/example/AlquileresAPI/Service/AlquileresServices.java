@@ -13,6 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -40,10 +41,11 @@ public class AlquileresServices {
 
     public Alquileres addAlquiler(String idCliente, Long idEstacion){
             RestTemplate template = new RestTemplate();
-            ResponseEntity<Estaciones> res = template.getForEntity("http://localhost:8083/api/estaciones", Estaciones.class, idEstacion);
+            ResponseEntity<Estaciones> res = template.getForEntity("http://localhost:8083/api/estaciones/"+idEstacion, Estaciones.class);
             Estaciones estacion =  res.getBody();
 
             Alquileres alquiler = new Alquileres();
+            alquiler.setFechaHoraRetiro(LocalDateTime.now());
             alquiler.setEstacionRetiro(estacion);
             alquiler.setEstado(1);
             alquiler.setIdCliente(idCliente);
