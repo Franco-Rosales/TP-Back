@@ -1,6 +1,8 @@
 package com.example.AlquileresAPI.Service;
 
 import com.example.AlquileresAPI.Entities.Alquileres;
+import com.example.AlquileresAPI.Entities.MonedaRequest;
+import com.example.AlquileresAPI.Entities.MonedaResponse;
 import com.example.AlquileresAPI.Entities.Tarifa;
 import com.example.AlquileresAPI.Respository.AlquileresRepository;
 import com.example.AlquileresAPI.Respository.TarifaRepository;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -56,39 +59,49 @@ public class AlquileresServices {
 
     public Alquileres finalizarAlquiler(Long idEstacionDevolucion,String idCliente, String tipoMoneda){
         Alquileres alquiler = alquileresRepository.findByEstadoAndIdCliente(1,idCliente);
-        if(alquiler != null){
+        if(alquiler != null) {
             RestTemplate template = new RestTemplate();
             ResponseEntity<Estaciones> res = template.getForEntity("http://localhost:8083/api/estaciones/" + idEstacionDevolucion, Estaciones.class);
-            Estaciones estacion =  res.getBody();
+            Estaciones estacion = res.getBody();
             alquiler.setEstacionDevolucion(estacion);
             alquiler.setEstado(2);
             alquiler.setFechaHoraDevolucion(java.time.LocalDateTime.now());
             alquiler.setTarifa(determinarTarifa(alquiler));
+
             alquiler.setMonto(calcularMonto(alquiler));
-
-            String url = "http://34.82.105.125:8080/ping";
-            String requestBody = "{moneda_destino:"+tipoMoneda+",importe:"+alquiler.getMonto()+"}";
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-            RestTemplate restTemplate = new RestTemplate();
-
-            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-
-            alquiler.setMonto(responseEntity.getBody().importe);
-
+            if (tipoMoneda != null) {
+                double importe = convertirMoneda(tipoMoneda, alquiler.getMonto());
+                alquiler.setMonto(importe);
+            }
             alquileresRepository.save(alquiler);
             return alquiler;
         }
         else{
-            throw new NoSuchElementException("No se encontró un alquiler activo para el cliente.");
+        throw new NoSuchElementException("No se encontró un alquiler activo para el cliente.");
 
+        }}
+
+
+    public double convertirMoneda(String monedaDestino, double importe){
+        try {
+            RestTemplate template = new RestTemplate();
+            MonedaRequest requestBody = new MonedaRequest(monedaDestino, importe);
+            HttpEntity<MonedaRequest> entity = new HttpEntity<>(requestBody);
+
+            ResponseEntity<MonedaResponse> res = template.postForEntity(
+                    "http://34.82.105.125:8080/convertir", entity, MonedaResponse.class
+            );
+
+            if (res.getStatusCode().is2xxSuccessful()){
+                return Objects.requireNonNull(res.getBody().getImporte());
+            } else {
+                throw new NoSuchElementException("Error al buscar la moneda");
+
+            }
+        } catch (HttpClientErrorException e){
+            throw new NoSuchElementException("Error al procesar la moneda");
         }
     }
-
     public Tarifa determinarTarifa(Alquileres alquiler) {
         LocalDateTime fecha = alquiler.getFechaHoraDevolucion();
 
