@@ -25,6 +25,7 @@ public class AlquileresServices {
     @Autowired
     private AlquileresRepository alquileresRepository;
 
+    @Autowired
     private TarifaRepository tarifaRepository;
 
     public List<Alquileres> getAlquileresFinalizados(double monto){
@@ -58,7 +59,7 @@ public class AlquileresServices {
         Alquileres alquiler = alquileresRepository.findByEstadoAndIdCliente(1,idCliente);
         if(alquiler != null){
             RestTemplate template = new RestTemplate();
-            ResponseEntity<Estaciones> res = template.getForEntity("http://localhost:8083/api/estaciones/{id}", Estaciones.class, idEstacionDevolucion);
+            ResponseEntity<Estaciones> res = template.getForEntity("http://localhost:8083/api/estaciones/" + idEstacionDevolucion, Estaciones.class);
             Estaciones estacion =  res.getBody();
             alquiler.setEstacionDevolucion(estacion);
             alquiler.setEstado(2);

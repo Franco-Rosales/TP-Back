@@ -28,7 +28,7 @@ public class GWConfig {
                 .build();
 
     }
-
+/*
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) throws Exception {
         http.authorizeExchange(exchanges -> exchanges
@@ -48,6 +48,27 @@ public class GWConfig {
                 .csrf(csrf -> csrf.disable());
         return http.build();
     }
+
+ */
+    @Bean
+    public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
+        http
+                .authorizeExchange(exchanges -> exchanges
+
+                        .pathMatchers("/api/estaciones/add", "/api/alquileres").hasAuthority("ADMIN")
+
+                        .pathMatchers("/api/estaciones","/api/estaciones/{id}", "/api/alquileres/add", "/api/alquileres/finalizar").hasAuthority("USUARIO")
+
+                        .anyExchange().authenticated()
+                )
+                // Configuración para el servidor de recursos OAuth2
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                // Deshabilitar CSRF ya que es una API, y usualmente el CSRF no es necesario para APIs REST
+                .csrf(csrf -> csrf.disable());
+
+        return http.build();
+    }
+
 
     @Bean
     public ReactiveJwtAuthenticationConverter jwtAuthenticationConverter() {

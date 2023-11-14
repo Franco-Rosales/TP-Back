@@ -27,7 +27,7 @@ public class EstacionesController {
         EstacionesDTO estacionDTO = estacionesService.getEstacionMasCercana(latitud,longitud);
         return ResponseEntity.ok(estacionDTO);
     }
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<EstacionesDTO> agregarEstacion(@RequestBody EstacionesDTO estacionesDTO){
         EstacionesDTO agregada = estacionesService.addEstacion(estacionesDTO);
         return ResponseEntity.ok(agregada);
