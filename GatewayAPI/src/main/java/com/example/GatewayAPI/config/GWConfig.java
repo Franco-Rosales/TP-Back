@@ -28,16 +28,16 @@ public class GWConfig {
                 .build();
 
     }
-/*
+
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) throws Exception {
         http.authorizeExchange(exchanges -> exchanges
 
                         // Esta ruta puede ser accedida por cualquiera, sin autorización
-                        .pathMatchers("/api/alquileres/**")
+                        .pathMatchers("/api/estaciones","/api/estaciones/{id}", "/api/alquileres/add", "/api/alquileres/finalizar")
                         .hasRole("USUARIO")
 
-                        .pathMatchers("/api/estacioens/**")
+                        .pathMatchers("/api/estaciones/add", "/api/alquileres")
                         .hasRole("ADMIN")
 
                         // Cualquier otra petición...
@@ -49,7 +49,8 @@ public class GWConfig {
         return http.build();
     }
 
- */
+
+    /*
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         http
@@ -68,8 +69,7 @@ public class GWConfig {
 
         return http.build();
     }
-
-
+*/
     @Bean
     public ReactiveJwtAuthenticationConverter jwtAuthenticationConverter() {
         var jwtAuthenticationConverter = new ReactiveJwtAuthenticationConverter();
