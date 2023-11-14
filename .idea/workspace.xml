@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16dcce6f-9c2e-4654-a5e1-ad68e220e898" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Entities/MonedaRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Entities/MonedaResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Controller/AlquileresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Controller/AlquileresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Service/AlquileresServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/AlquileresAPI/src/main/java/com/example/AlquileresAPI/Service/AlquileresServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlquileresAPI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/AlquileresAPI/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EstacionesAPI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/EstacionesAPI/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bicicletas.db" beforeDir="false" afterPath="$PROJECT_DIR$/bicicletas.db" afterDir="false" />
-    </list>
+    <list default="true" id="16dcce6f-9c2e-4654-a5e1-ad68e220e898" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
