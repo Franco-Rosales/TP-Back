@@ -28,8 +28,8 @@ public class AlquileresController {
     }
 
     @PatchMapping("/finalizar")
-    public ResponseEntity<Alquileres> finalizarAlquiler(@RequestParam("idEstacion") Long idEstacion, @RequestParam("idCliente") String idCliente){
-        Alquileres alquiler = alquileresServices.finalizarAlquiler(idEstacion,idCliente);
+    public ResponseEntity<Alquileres> finalizarAlquiler(@RequestParam("idEstacion") Long idEstacion, @RequestParam("idCliente") String idCliente, @RequestParam("tipoMoneda") String tipoMoneda){
+        Alquileres alquiler = alquileresServices.finalizarAlquiler(idEstacion,idCliente,tipoMoneda);
         return ResponseEntity.ok(alquiler);
     }
 

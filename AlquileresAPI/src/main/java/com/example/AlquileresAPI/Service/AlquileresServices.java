@@ -6,8 +6,7 @@ import com.example.AlquileresAPI.Respository.AlquileresRepository;
 import com.example.AlquileresAPI.Respository.TarifaRepository;
 import com.example.EstacionesAPI.Entities.Estaciones;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -55,7 +54,7 @@ public class AlquileresServices {
 
     }
 
-    public Alquileres finalizarAlquiler(Long idEstacionDevolucion,String idCliente){
+    public Alquileres finalizarAlquiler(Long idEstacionDevolucion,String idCliente, String tipoMoneda){
         Alquileres alquiler = alquileresRepository.findByEstadoAndIdCliente(1,idCliente);
         if(alquiler != null){
             RestTemplate template = new RestTemplate();
@@ -66,6 +65,21 @@ public class AlquileresServices {
             alquiler.setFechaHoraDevolucion(java.time.LocalDateTime.now());
             alquiler.setTarifa(determinarTarifa(alquiler));
             alquiler.setMonto(calcularMonto(alquiler));
+
+            String url = "http://34.82.105.125:8080/ping";
+            String requestBody = "{moneda_destino:"+tipoMoneda+",importe:"+alquiler.getMonto()+"}";
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+            alquiler.setMonto(responseEntity.getBody().importe);
+
             alquileresRepository.save(alquiler);
             return alquiler;
         }
