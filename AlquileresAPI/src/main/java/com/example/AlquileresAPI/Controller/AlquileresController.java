@@ -16,7 +16,7 @@ public class AlquileresController {
     private AlquileresServices alquileresServices;
 
     @GetMapping
-    public ResponseEntity<List<Alquileres>> getAlquileres(@RequestParam (name = "monto",required = false) double monto){
+    public ResponseEntity<List<Alquileres>> getAlquileres(@RequestParam (name = "monto") double monto){
         List<Alquileres> alquileres = alquileresServices.getAlquileresFinalizados(monto);
         return ResponseEntity.ok(alquileres);
     }

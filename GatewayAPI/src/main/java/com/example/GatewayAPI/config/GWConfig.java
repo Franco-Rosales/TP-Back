@@ -34,7 +34,7 @@ public class GWConfig {
         http.authorizeExchange(exchanges -> exchanges
 
                         // Esta ruta puede ser accedida por cualquiera, sin autorización
-                        .pathMatchers("/api/estaciones","/api/estaciones/{id}", "/api/alquileres/add", "/api/alquileres/finalizar")
+                        .pathMatchers("/api/estaciones","/api/estaciones/estacion-cercana", "/api/alquileres/add", "/api/alquileres/finalizar")
                         .hasRole("USUARIO")
 
                         .pathMatchers("/api/estaciones/add", "/api/alquileres")
